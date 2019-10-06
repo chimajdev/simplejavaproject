@@ -1,4 +1,6 @@
-node {
+pipeline {
+    agent any
+  node {
 
   def mvnHome = tool 'Maven3'
   stage('Checkout') {
