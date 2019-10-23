@@ -14,6 +14,19 @@ stage ('Code Quality scan') {
       sh "${mvnHome}/bin/mvn -f MyWebApp/pom.xml sonar:sonar"
         }
   }
+    
+stages {
+        stage('Download') {
+            steps {
+                sh 'echo "artifact file" > generatedFile.txt'
+            }
+        }
+    }
+    post {
+        always {
+            archiveArtifacts artifacts: 'generatedFile.txt', onlyIfSuccessful: true
+        }
+    }
 
     stage ('Code coverage') {
       jacoco()
